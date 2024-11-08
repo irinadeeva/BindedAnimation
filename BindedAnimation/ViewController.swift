@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     private let initialSize: CGFloat = 100
     private let finalScale: CGFloat = 1.5
     private let rotationAngle: CGFloat = .pi / 2
-    private let layoutMargin: CGFloat = 16
+    private let layoutMargin: CGFloat = 50
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +41,11 @@ class ViewController: UIViewController {
             sliderView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
 
-        let maxTranslation = view.frame.width - view.layoutMargins.right * 2  - initialSize / 2 - 8
+        let maxTranslation = initialSize * .pi - layoutMargin
 
         animatorForward = UIViewPropertyAnimator(duration: 1, curve: .easeInOut) { [unowned self, squareView] in
-           squareView.center.x = maxTranslation
-           squareView.transform = CGAffineTransform(rotationAngle: rotationAngle).scaledBy(x: finalScale, y: finalScale)
+            squareView.center.x = maxTranslation
+            squareView.transform = CGAffineTransform(rotationAngle: rotationAngle).scaledBy(x: finalScale, y: finalScale)
         }
 
         animatorForward?.pausesOnCompletion = true
